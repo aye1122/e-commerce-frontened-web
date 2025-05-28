@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart Mockup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .header-top {
+            background-color: #fff;
+            padding: 10px 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-top .brand-logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #007bff; /* Example brand color */
+        }
+
+        .header-top .search-bar {
+            display: flex;
+        }
+
+        .header-top .search-bar input {
+            border: 1px solid #ccc;
+            padding: 8px 12px;
+            border-radius: 4px;
+            width: 300px;
+        }
+
+        .header-top .search-bar select {
+            border: 1px solid #ccc;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin-left: 5px;
+        }
+
+        .header-top .search-bar button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        .header-top .user-actions a {
+            margin-left: 15px;
+            text-decoration: none;
+            color: #555;
+        }
+
+        .navbar {
+            background-color: #fff;
+            padding: 10px 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .navbar ul li {
+                margin-right: 20px;
+            }
+
+            .navbar ul li a {
+                text-decoration: none;
+                color: #555;
+                font-weight: 500;
+            }
+
+            .navbar .currency-country select {
+                border: 1px solid #ccc;
+                padding: 5px 10px;
+                border-radius: 4px;
+            }
+
+        .content-area {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .breadcrumbs {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .breadcrumbs a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .breadcrumbs span {
+            margin: 0 5px;
+        }
+
+        /* --- Shopping Cart Specific Styles --- */
+        .cart-container {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start; /* Align cart items and summary to the top */
+        }
+
+        .cart-items-section {
+            flex-grow: 1;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .cart-header h2 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 20px;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            align-items: center;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .item-details {
+            flex-grow: 1;
+        }
+
+        .item-details .name {
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .item-details .price-per-item {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .item-details .remove-btn {
+            font-size: 0.85em;
+            color: #007bff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .item-quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-right: 20px;
+        }
+
+        .item-quantity-control input {
+            width: 40px;
+            padding: 5px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .item-quantity-control button {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .item-total-price {
+            font-weight: 700;
+            color: #e67e22; /* Orange price color */
+            font-size: 1.1em;
+            width: 100px; /* Fixed width for alignment */
+            text-align: right;
+        }
+
+        .cart-summary {
+            flex-basis: 350px; /* Fixed width for summary section */
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .cart-summary h3 {
+            margin-top: 0;
+            font-size: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .summary-row.total {
+            font-weight: 700;
+            font-size: 1.2em;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            margin-top: 15px;
+        }
+
+        .summary-row span:first-child {
+            color: #666;
+        }
+
+        .promo-code {
+            display: flex;
+            margin-top: 20px;
+            gap: 5px;
+        }
+
+        .promo-code input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .promo-code button {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .checkout-btn {
+            background-color: #28a745; /* Green for checkout */
+            color: #fff;
+            border: none;
+            width: 100%;
+            padding: 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 700;
+            margin-top: 20px;
+        }
+
+        .cart-bottom-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .cart-bottom-actions button {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .cart-guarantees {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .cart-guarantees div {
+            flex: 1;
+            padding: 0 10px;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .cart-guarantees div i { /* Placeholder for icons */
+            font-size: 24px;
+            margin-bottom: 10px;
+            display: block;
+            color: #007bff;
+        }
+
+
+        .saved-for-later-section {
+            margin-top: 40px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .saved-for-later-section h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .saved-products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Smaller items for related */
+            gap: 15px;
+        }
+
+        .saved-product-item {
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            background-color: #fcfcfc;
+        }
+
+        .saved-product-item img {
+            max-width: 100%;
+            height: 100px; /* Fixed height for consistency */
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .saved-product-item .name {
+            font-size: 0.9em;
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .saved-product-item .price {
+            font-size: 0.85em;
+            color: #e67e22;
+            font-weight: 700;
+        }
+        /* --- END Shopping Cart Specific Styles --- */
+
+        /* --- Discount Banner --- */
+        .discount-banner {
+            background-color: #007bff; /* Blue */
+            color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.1em;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .discount-banner button {
+            background-color: #f1c40f; /* Yellow */
+            color: #333;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+        /* --- End Discount Banner --- */
+
+
+        .newsletter-section {
+            background-color: #fff;
+            padding: 40px 20px;
+            margin-top: 40px; /* More space before footer */
+            text-align: center;
+            border-top: 1px solid #eee;
+            border-radius: 8px; /* Added for consistency */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Added for consistency */
+        }
+
+        .newsletter-section h3 {
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .newsletter-section p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .newsletter-form input[type="email"] {
+            border: 1px solid #ccc;
+            padding: 10px 15px;
+            border-radius: 4px;
+            width: 300px;
+            max-width: 80%;
+            margin-right: 10px;
+        }
+
+        .newsletter-form button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .footer {
+            background-color: #fff;
+            padding: 40px 20px;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px; /* Space from newsletter */
+            border-radius: 8px; /* Added for consistency */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Added for consistency */
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+            max-width: 280px; /* Adjust as needed */
+        }
+
+        .footer-column h4 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-column ul li a {
+            text-decoration: none;
+            color: #666;
+        }
+
+        .footer-column ul li a:hover {
+            color: #007bff;
+        }
+
+        .footer-column .social-icons a {
+            margin-right: 10px;
+            color: #666;
+            font-size: 20px; /* Placeholder for icon size */
+        }
+
+        .footer-column .app-links img {
+            max-width: 120px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .copyright {
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+            color: #555;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-top">
+            <div class="brand-logo">Brand</div>
+            <div class="search-bar">
+                <input type="text" placeholder="Email">
+                <select>
+                    <option>All Category</option>
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                </select>
+                <button>Subscribe</button>
+            </div>
+            <div class="user-actions">
+                <a href="#">Profile</a>
+                <a href="#">Message</a>
+                <a href="#">Orders</a>
+                <a href="#">My Cart</a>
+            </div>
+        </div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="#">All Category</a></li>
+                <li><a href="#">Hot Offers</a></li>
+                <li><a href="#">Gift Boxes</a></li>
+                <li><a href="#">Projects</a></li>
+                <li><a href="#">Menu Item</a></li>
+                <li><a href="#">Help <i class="arrow down"></i></a></li>
+            </ul>
+            <div class="currency-country">
+                <select>
+                    <option>Currency</option>
+                    <option>USD</option>
+                    <option>EUR</option>
+                </select>
+                <select>
+                    <option>Country</option>
+                    <option>USA</option>
+                    <option>UK</option>
+                </select>
+            </div>
+        </nav>
+    </header>
+
+    <div class="content-area">
+        <div class="breadcrumbs">
+            <a href="#">Home</a> <span>></span> <a href="#">Clothing</a> <span>></span> <a href="#">My Cart</a>
+        </div>
+
+        <div class="cart-container">
+            <div class="cart-items-section">
+                <div class="cart-header">
+                    <h2>My Cart (3)</h2>
+                    <div class="options">
+                        <button>Remove all</button>
+                    </div>
+                </div>
+
+                <div class="cart-item">
+                    <img src="assessts/images/shirt.png" alt="T-shirts with multiple colors, for men and lady">
+                    <div class="item-details">
+                        <div class="name">T-shirts with multiple colors, for men and lady</div>
+                        <div class="price-per-item">$78.00</div>
+                        <div class="remove-btn">Remove</div>
+                    </div>
+                    <div class="item-quantity-control">
+                        <button>-</button>
+                        <input type="text" value="1">
+                        <button>+</button>
+                    </div>
+                    <div class="item-total-price">$78.00</div>
+                </div>
+
+                <div class="cart-item">
+                    <img src="assessts/images/shirt.png" alt="T-shirts with multiple colors, for men and lady">
+                    <div class="item-details">
+                        <div class="name">T-shirts with multiple colors, for men and lady</div>
+                        <div class="price-per-item">$39.00</div>
+                        <div class="remove-btn">Remove</div>
+                    </div>
+                    <div class="item-quantity-control">
+                        <button>-</button>
+                        <input type="text" value="1">
+                        <button>+</button>
+                    </div>
+                    <div class="item-total-price">$39.00</div>
+                </div>
+
+                <div class="cart-item">
+                    <img src="assessts/images/shirt.png" alt="T-shirts with multiple colors, for men and lady">
+                    <div class="item-details">
+                        <div class="name">T-shirts with multiple colors, for men and lady</div>
+                        <div class="price-per-item">$10.50</div>
+                        <div class="remove-btn">Remove</div>
+                    </div>
+                    <div class="item-quantity-control">
+                        <button>-</button>
+                        <input type="text" value="1">
+                        <button>+</button>
+                    </div>
+                    <div class="item-total-price">$10.50</div>
+                </div>
+
+                <div class="cart-bottom-actions">
+                    <button>Continue shopping</button>
+                    <button>Clear Cart</button>
+                </div>
+            </div>
+
+            <div class="cart-summary">
+                <h3>Have a coupon?</h3>
+                <div class="promo-code">
+                    <input type="text" placeholder="Coupon code">
+                    <button>Apply</button>
+                </div>
+                <div class="summary-row" style="margin-top: 20px;">
+                    <span>Subtotal:</span>
+                    <span>$127.50</span>
+                </div>
+                <div class="summary-row">
+                    <span>Discount:</span>
+                    <span style="color: red;">-$14.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Tax:</span>
+                    <span>$0.00</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total:</span>
+                    <span>$113.50</span>
+                </div>
+                <button class="checkout-btn">Proceed to checkout</button>
+            </div>
+        </div>
+
+        <div class="cart-guarantees">
+            <div>
+                <i>&#128274;</i> <span>Secure payment</span>
+            </div>
+            <div>
+                <i>&#128100;</i> <span>Customer support</span>
+            </div>
+            <div>
+                <i>&#128666;</i> <span>Free delivery</span>
+            </div>
+        </div>
+
+        <div class="saved-for-later-section">
+            <h3>Saved for later</h3>
+            <div class="saved-products-grid">
+                <div class="saved-product-item">
+                    <img src="https://via.placeholder.com/100x100/f0f0f0?text=Tablet" alt="Tablet">
+                    <div class="name">Tablet Original</div>
+                    <div class="price">$98.50</div>
+                </div>
+                <div class="saved-product-item">
+                    <img src="https://via.placeholder.com/100x100/f0f0f0?text=Phone" alt="Phone">
+                    <div class="name">Phone Original</div>
+                    <div class="price">$98.50</div>
+                </div>
+                <div class="saved-product-item">
+                    <img src="https://via.placeholder.com/100x100/f0f0f0?text=Watch" alt="Watch">
+                    <div class="name">Watch Original</div>
+                    <div class="price">$98.50</div>
+                </div>
+                <div class="saved-product-item">
+                    <img src="https://via.placeholder.com/100x100/f0f0f0?text=Laptop" alt="Laptop">
+                    <div class="name">Laptop Original</div>
+                    <div class="price">$98.50</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="discount-banner">
+            <span>Super discount on more than 100 USD</span>
+            <button>Shop Now</button>
+        </div>
+    </div>
+
+    <section class="newsletter-section">
+        <h3>Subscribe to our Newsletter</h3>
+        <p>Get daily news on upcoming offers from many suppliers all over the world</p>
+        <div class="newsletter-form">
+            <input type="email" placeholder="Email">
+            <button>Subscribe</button>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-column">
+            <div class="brand-logo" style="margin-bottom: 10px;">Brand</div>
+            <p style="font-size: 0.9em; color: #666;">Best information about the company goes here but now lorem ipsum is</p>
+            <div class="social-icons">
+                <a href="#">F</a> <a href="#">T</a> <a href="#">I</a> <a href="#">L</a> <a href="#">Y</a> </div>
+        </div>
+
+        <div class="footer-column">
+            <h4>About</h4>
+            <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Find Store</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">Blogs</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h4>Partnership</h4>
+            <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Find Store</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">Blogs</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h4>Information</h4>
+            <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Find Store</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">Blogs</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h4>For Users</h4>
+            <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Find Store</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">Blogs</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h4>Get App</h4>
+            <div class="app-links">
+                <img src="https://via.placeholder.com/120x40/000000/ffffff?text=Google+Play" alt="Google Play">
+                <img src="https://via.placeholder.com/120x40/000000/ffffff?text=App+Store" alt="App Store">
+            </div>
+        </div>
+    </footer>
+
+    <div class="copyright">
+        &copy; 2023 Ecommerce
+    </div>
+
+</body>
+</html>

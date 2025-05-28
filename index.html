@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Full Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-e/4z++/haxmG0/sL7b2/aT+N5N0/yJzVv/v6Zg8b/8q2+w+7tG1Q/f6t+d+z0/mF" crossorigin="anonymous">
+
+    <style>
+        /* Custom styles to match the image aesthetics more closely */
+        body {
+            background-color: #f8f9fa; /* Light gray background */
+        }
+        .navbar-custom {
+            background-color: #ffffff; /* White background for navbar */
+            border-bottom: 1px solid #e0e0e0;
+            box-shadow: 0 2px 4px rgba(0,0,0,.04);
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .navbar-custom .form-control {
+            border-radius: 0.25rem; /* Standard Bootstrap radius */
+            border-color: #ced4da;
+            width: 250px; /* Adjust search input width */
+        }
+        .navbar-custom .btn-subscribe {
+            background-color: #0d6efd; /* Blue subscribe button */
+            color: white;
+            border-radius: 0.25rem;
+            padding: 8px 20px;
+            margin-left: 10px;
+        }
+        .navbar-custom .nav-link,
+        .navbar-custom .dropdown-toggle {
+            color: #333;
+            font-weight: 500;
+        }
+        .navbar-custom .profile-icon {
+            font-size: 1.2rem;
+            margin-right: 5px;
+        }
+
+        .secondary-nav {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 10px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,.02);
+        }
+        .secondary-nav .nav-link {
+            color: #555;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+        }
+        .secondary-nav .dropdown-toggle {
+            color: #555;
+            font-weight: 500;
+        }
+        .secondary-nav .currency-country {
+            margin-left: auto; /* Push to the right */
+        }
+        .secondary-nav .currency-country .dropdown-toggle {
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            padding: 0.25rem 0.75rem;
+            background-color: #f8f9fa;
+        }
+
+        .sidebar {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,.04);
+            margin-top: 20px; /* Space from header */
+        }
+        .sidebar .nav-link {
+            color: #333;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .sidebar .nav-link:last-child {
+            border-bottom: none;
+        }
+        .sidebar .nav-link:hover {
+            color: #0d6efd; /* Bootstrap primary blue on hover */
+        }
+
+        .main-banner {
+            background-color: #a3e6d2; /* Greenish background as seen in image */
+            color: #333; /* Text color for readability */
+            padding: 60px 40px;
+            border-radius: 8px;
+            text-align: left;
+            position: relative;
+            overflow: hidden; /* To contain background elements */
+            margin-top: 20px; /* Space from header */
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* To place image on right */
+        }
+        .main-banner-content {
+            flex: 1;
+            max-width: 60%; /* Adjust width for text content */
+            position: relative;
+            z-index: 1;
+        }
+        .main-banner h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .main-banner .btn {
+            background-color: #fff;
+            color: #333;
+            border-radius: 50px;
+            padding: 10px 30px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,.1);
+        }
+        .main-banner-image {
+            flex: 1;
+            text-align: right;
+            position: relative;
+            z-index: 1;
+        }
+        .main-banner-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px; /* Slightly rounded corners for image */
+        }
+
+        .user-panel {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,.04);
+            margin-top: 20px; /* Space from header */
+            text-align: center;
+        }
+        .user-panel h5 {
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        .user-panel .btn-primary {
+            background-color: #0d6efd; /* Bootstrap primary blue */
+            border-color: #0d6efd;
+            width: 100%;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .user-panel .btn-outline-primary {
+            width: 100%;
+            font-weight: bold;
+            border-color: #0d6efd;
+            color: #0d6efd;
+        }
+
+        .offer-card {
+            background-color: #ff7f50; /* Coral color as seen in image */
+            color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 15px;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,.05);
+        }
+        .offer-card.green {
+            background-color: #28a745; /* Green for the second offer card */
+        }
+        .offer-card p {
+            margin-bottom: 0;
+            font-size: 1.1rem;
+        }
+        .offer-card a {
+            color: #fff;
+            text-decoration: underline;
+        }
+        .offer-card a:hover {
+            color: #eee;
+        }
+
+        /* Section Specific Styles */
+        .section-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Responsive grid */
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .product-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.05);
+            text-align: center;
+            padding: 15px;
+            overflow: hidden;
+            transition: transform 0.2s ease-in-out;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .product-card img {
+            max-width: 100%;
+            height: 120px; /* Fixed height for image consistency */
+            object-fit: contain; /* Ensure image fits without cropping */
+            margin-bottom: 10px;
+        }
+        .product-card .product-name {
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .product-card .product-price {
+            color: #007bff; /* Bootstrap primary color */
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .product-card .discount {
+            color: #dc3545; /* Bootstrap danger color */
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        .product-card .source-now {
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        /* Deals and Offers Timer */
+        .deals-timer {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #555;
+        }
+        .timer-unit {
+            text-align: center;
+        }
+        .timer-unit span {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: normal;
+        }
+
+        /* Request Form Section */
+        .request-section {
+            background-color: #e0f2f7; /* Light blue background as in image */
+            padding: 40px;
+            border-radius: 8px;
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            position: relative; /* For background image */
+            overflow: hidden;
+        }
+        .request-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://via.placeholder.com/800x300/cbebf2/ffffff?text=Blue+abstract+background'); /* Placeholder for blue abstract background */
+            background-size: cover;
+            background-position: center;
+            opacity: 0.6; /* Slightly transparent */
+            z-index: 0;
+        }
+        .request-content, .request-form-card {
+            position: relative;
+            z-index: 1;
+        }
+        .request-content {
+            flex: 1;
+            padding-right: 30px;
+            color: #333;
+            max-width: 50%;
+        }
+        .request-content h3 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .request-content p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        .request-form-card {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.1);
+            max-width: 400px;
+            flex-shrink: 0;
+        }
+        .request-form-card .form-label {
+            font-weight: 500;
+        }
+        .request-form-card .form-control, .request-form-card .form-select {
+            margin-bottom: 15px;
+        }
+        .request-form-card .btn-send-inquiry {
+            background-color: #0d6efd;
+            color: white;
+            font-weight: bold;
+            width: 100%;
+            padding: 10px 0;
+        }
+
+        /* Suppliers by Region */
+        .suppliers-by-region {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,.04);
+            margin-top: 40px;
+        }
+        .suppliers-by-region h3 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .region-card {
+            text-align: center;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        .region-card img {
+            width: 30px;
+            height: 20px;
+            border: 1px solid #ddd;
+            margin-right: 10px;
+        }
+        .region-card p {
+            margin-bottom: 0;
+            font-size: 1rem;
+            color: #555;
+        }
+        .region-card a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .region-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* Newsletter */
+        .newsletter-section {
+            background-color: #f0f0f0;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        .newsletter-section h4 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .newsletter-section p {
+            color: #555;
+            margin-bottom: 20px;
+        }
+        .newsletter-form .input-group {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .newsletter-form .form-control {
+            border-top-left-radius: 50px;
+            border-bottom-left-radius: 50px;
+            padding-left: 20px;
+        }
+        .newsletter-form .btn-subscribe-newsletter {
+            background-color: #0d6efd;
+            color: white;
+            border-top-right-radius: 50px;
+            border-bottom-right-radius: 50px;
+            padding: 10px 25px;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #343a40; /* Dark background */
+            color: #ffffff;
+            padding: 40px 0;
+            margin-top: 50px;
+            font-size: 0.9rem;
+        }
+        .footer .footer-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .footer .footer-brand img {
+            filter: brightness(0) invert(1); /* Make logo white for dark background */
+            margin-right: 10px;
+        }
+        .footer ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer ul li a {
+            color: #cccccc;
+            text-decoration: none;
+            line-height: 2;
+        }
+        .footer ul li a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+        .footer .social-icons a {
+            color: #ffffff;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            transition: color 0.2s;
+        }
+        .footer .social-icons a:hover {
+            color: #0d6efd; /* Highlight on hover */
+        }
+        .footer .app-badges img {
+            width: 120px;
+            margin-bottom: 10px;
+        }
+        .footer .copyright {
+            margin-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #aaaaaa;
+        }
+
+        @media (max-width: 991.98px) { /* Adjust for medium and small screens */
+            .main-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+            .main-banner-content {
+                max-width: 100%;
+                padding-right: 0;
+                margin-bottom: 20px;
+            }
+            .main-banner-image {
+                text-align: center;
+            }
+            .request-section {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .request-content {
+                max-width: 100%;
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+            .request-form-card {
+                max-width: 100%;
+                width: 100%;
+            }
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Smaller cards on smaller screens */
+            }
+        }
+         @media (max-width: 767.98px) { /* Adjust for small screens */
+            .navbar-custom .form-control {
+                width: 100%;
+                margin-top: 10px;
+            }
+            .navbar-custom .btn-subscribe {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+            .user-panel, .offer-card {
+                margin-top: 10px; /* Less space on small screens */
+            }
+            .secondary-nav .currency-country {
+                margin-left: 0;
+                margin-top: 10px;
+                text-align: center;
+            }
+            .secondary-nav .navbar-nav {
+                width: 100%;
+                text-align: center;
+            }
+            .deals-timer {
+                flex-wrap: wrap;
+            }
+         }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="assessts/images/logo-symbol.png" alt="Brand Logo" class="d-inline-block align-text-top me-2">
+              <img src="assessts/images/Brand.png">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
+                    <li class="nav-item">
+                        <input type="email" class="form-control" placeholder="Email" aria-label="Email">
+                    </li>
+                    <li class="nav-item dropdown ms-lg-2">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCategory" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            All Category
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownCategory">
+                            <li><a class="dropdown-item" href="#">Category 1</a></li>
+                            <li><a class="dropdown-item" href="#">Category 2</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">More Categories</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <button class="btn btn-subscribe">Subscribe</button>
+                    </li>
+                </ul>
+                <ul class="navbar-nav d-flex align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-user-circle profile-icon"></i>Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Message</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Orders</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">My Cart</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light secondary-nav">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#secondaryNavbar" aria-controls="secondaryNavbar" aria-expanded="false" aria-label="Toggle secondary navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="secondaryNavbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">All Category</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Hot Offers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Gift Boxes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Projects</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuItem" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Menu Item
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuItem">
+                            <li><a class="dropdown-item" href="#">Submenu 1</a></li>
+                            <li><a class="dropdown-item" href="#">Submenu 2</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownHelp" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Help
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownHelp">
+                            <li><a class="dropdown-item" href="#">FAQ</a></li>
+                            <li><a class="dropdown-item" href="#">Contact Us</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="navbar-nav currency-country d-flex">
+                    <li class="nav-item dropdown me-2">
+                        <a class="nav-link dropdown-toggle currency-country-dropdown" href="#" id="navbarDropdownCurrency" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Currency <i class="fas fa-chevron-down ms-1"></i>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownCurrency">
+                            <li><a class="dropdown-item" href="#">USD</a></li>
+                            <li><a class="dropdown-item" href="#">EUR</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle currency-country-dropdown" href="#" id="navbarDropdownCountry" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Country <i class="fas fa-chevron-down ms-1"></i>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownCountry">
+                            <li><a class="dropdown-item" href="#">USA</a></li>
+                            <li><a class="dropdown-item" href="#">UK</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-3">
+        <div class="row">
+            <div class="col-lg-2 col-md-3">
+                <div class="sidebar">
+                    <nav class="nav flex-column">
+                        <a class="nav-link active" aria-current="page" href="#">Automobiles</a>
+                        <a class="nav-link" href="#">Clothes Wear</a>
+                        <a class="nav-link" href="#">Home Interior</a>
+                        <a class="nav-link" href="#">Computer and Tech</a>
+                        <a class="nav-link" href="#">Tools and Equipment</a>
+                        <a class="nav-link" href="#">Sports and Outdoor</a>
+                        <a class="nav-link" href="#">Animals and Pets</a>
+                        <a class="nav-link" href="#">Machinery Tools</a>
+                        <a class="nav-link" href="#">Other Categories</a>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="col-lg-10 col-md-9">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="main-banner">
+                            <div class="main-banner-content">
+                                <h2>Latest trending<br>Electronic items</h2>
+                                <button class="btn">Learn more</button>
+                            </div>
+                            <div class="main-banner-image">
+                                <img src="assessts/images/banner.png" alt="Laptop and Headphones">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="user-panel">
+                            <h5>Hi, user<br>let's get started</h5>
+                            <button class="btn btn-primary">Join Now</button>
+                            <button class="btn btn-outline-primary">Log In</button>
+                        </div>
+                        <div class="offer-card">
+                            <p>Get US $10 off<br>with a new supplier</p>
+                            <a href="#">Send quotes with<br>supplier preferences</a>
+                        </div>
+                        <div class="offer-card green">
+                            <p>Another great offer<br>or advertisement here</p>
+                            <a href="#">Discover more</a>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="section-header">Deals and offers</h3>
+                <div class="text-start mb-3" style="color: #666;">Hygiene Equipments</div>
+                <div class="deals-timer">
+                    <div class="timer-unit">04<span>Days</span></div>
+                    <div class="timer-unit">13<span>Hour</span></div>
+                    <div class="timer-unit">34<span>Min</span></div>
+                    <div class="timer-unit">56<span>sec</span></div>
+                </div>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <img src="assessts/images/smartwatch.png" alt="Smart Watch">
+                        <div class="product-name">Smart Watches</div>
+                        <div class="discount">25%</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="assessts/images/laptop.png" alt="Laptop">
+                        <div class="product-name">Laptops</div>
+                        <div class="discount">15%</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="assessts/images/gaming headphone.png" alt="GoPro Camera">
+                        <div class="product-name">GoPro Cameras</div>
+                        <div class="discount">40%</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="assessts/images/camera.png" alt="Headphones">
+                        <div class="product-name">Headphones</div>
+                        <div class="discount">25%</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="assessts/images/mobile.png" alt="Canon Camera">
+                        <div class="product-name">Canon Cameras</div>
+                        <div class="discount">25%</div>
+                    </div>
+                </div>
+
+                <h3 class="section-header">Home and Outdoor</h3>
+                <div class="text-start mb-3" style="color: #666;">Source Now</div>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <img src="assessts/images/sofa.png" alt="Soft Chairs">
+                        <div class="product-name">Soft Chairs</div>
+                        <div class="product-price">From USD 19</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="assessts/images/lamp.png" alt="Sofa & Chair">
+                        <div class="product-name">Sofa & Chair</div>
+                        <div class="product-price">From USD 19</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="assessts/images/bath.png" alt="Kitchen Dishes">
+                        <div class="product-name">Kitchen Dishes</div>
+                        <div class="product-price">From USD 19</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="assessts/images/matka.png" alt="Smart Watches">
+                        <div class="product-name">Smart Watches</div>
+                        <div class="product-price">From USD 19</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="assessts/images/fruit.png" alt="Terracotta Pot">
+                        <div class="product-name">Terracotta Pot</div>
+                        <div class="product-price">From USD 19</div>
+                    </div>
+                     <div class="product-card">
+                        <img src="assessts/images/ac.png" alt="Kitchen Mixers">
+                        <div class="product-name">Kitchen Mixers</div>
+                        <div class="product-price">USD 105</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="assessts/images/mir.jpg" alt="Blenders">
+                        <div class="product-name">Blenders</div>
+                        <div class="product-price">USD 105</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="assessts/images/plant.png" alt="Home Appliance">
+                        <div class="product-name">Home Appliance</div>
+                        <div class="product-price">USD 105</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="assessts/images/sofa.png" alt="Coffee Maker">
+                        <div class="product-name">Coffee Maker</div>
+                        <div class="product-price">USD 105</div>
+                    </div>
+                    </div>
+
+                <h3 class="section-header">Consumer electronic and gadgets</h3>
+                <div class="text-start mb-3" style="color: #666;">Source Now</div>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <img src="assessts/images/smartwatch.png" alt="Smart Watches">
+                        <div class="product-name">Smart Watches</div>
+                        <div class="product-price">USD 50</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="assessts/images/camera.png" alt="Cameras">
+                        <div class="product-name">Cameras</div>
+                        <div class="product-price">USD 50</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="assessts/images/hp.png" alt="Headphones">
+                        <div class="product-name">Headphones</div>
+                        <div class="product-price">USD 50</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="assessts/images/black.png" alt="Electric Kettle">
+                        <div class="product-name">Electric Kettle</div>
+                        <div class="product-price">USD 50</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="assessts/images/phone.png" alt="Smartphone">
+                        <div class="product-name">Smartphone</div>
+                        <div class="product-price">USD 50</div>
+                    </div>
+                     <div class="product-card">
+                        <img src="assessts/images/red phone.png" alt="Headphones">
+                        <div class="product-name">Headphones</div>
+                        <div class="product-price">USD 50</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="assessts/images/laptop.png" alt="Laptops">
+                        <div class="product-name">Laptops</div>
+                        <div class="product-price">USD 50</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="assessts/images/phone.png" alt="Smartphones">
+                        <div class="product-name">Smartphones</div>
+                        <div class="product-price">USD 50</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="assessts/images/black.png" alt="Electric Kettle">
+                        <div class="product-name">Electric Kettle</div>
+                        <div class="product-price">USD 50</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="assessts/images/mobile.png" alt="Tablet">
+                        <div class="product-name">Tablet</div>
+                        <div class="product-price">USD 50</div>
+                    </div>
+                </div>
+
+                <div class="request-section">
+                    <div class="request-content">
+                        <h3>An easy way to send<br>requests to all suppliers</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                    </div>
+                    <div class="request-form-card">
+                        <h5 class="mb-3">Send quote to suppliers</h5>
+                        <div class="mb-3">
+                            <label for="whatDoYouNeed" class="form-label">What item do you need?</label>
+                            <input type="text" class="form-control" id="whatDoYouNeed" placeholder="Type more details">
+                        </div>
+                        <div class="row g-3 align-items-center mb-3">
+                            <div class="col-auto">
+                                <label for="quantity" class="form-label mb-0">Quantity</label>
+                            </div>
+                            <div class="col-4">
+                                <input type="number" class="form-control" id="quantity" value="1">
+                            </div>
+                            <div class="col-auto">
+                                <select class="form-select" aria-label="Quantity Unit">
+                                    <option selected>Pcs</option>
+                                    <option value="1">Kg</option>
+                                    <option value="2">Meters</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-send-inquiry">Send Inquiry</button>
+                    </div>
+                </div>
+
+                <h3 class="section-header">Recommended items</h3>
+                <div class="product-grid">
+                     <div class="product-card">
+                        <img src="assessts/images/brown cort.jpg" alt="Jacket">
+                        <div class="product-price">$10.00</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="assessts/images/pant.png" alt="Shorts">
+                        <div class="product-price">$19.00</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="assessts/images/bag.png" alt="Backpack">
+                        <div class="product-price">$19.00</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="assessts/images/blue.png" alt="Wallet">
+                        <div class="product-price">$34.00</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="assessts/images/matka.png" alt="Suit Jacket">
+                        <div class="product-price">$99.00</div>
+                    </div>
+                     <div class="product-card">
+                        <img src="assessts/images/camera.png" alt="Camera">
+                        <div class="product-price">$16.00</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="assessts/images/hp.png" alt="Headphones">
+                        <div class="product-price">$19.00</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="assessts/images/lamp.png" alt="Denim Shorts">
+                        <div class="product-price">$19.00</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="assessts/images/laptop.png" alt="Laptop">
+                        <div class="product-price">$19.00</div>
+                    </div>
+                    <div class="product-card">
+                        <img src="assessts/images/smartwatch.png" alt="Smart Watch">
+                        <div class="product-price">$19.00</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid mt-5">
+        <div class="suppliers-by-region">
+            <h3>Suppliers by Region</h3>
+            <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3">
+                <div class="col">
+                    <div class="region-card">
+                        <img src="https://flagcdn.com/w20/ae.png" alt="UAE Flag">
+                        <div>
+                            <p>Arabic Emirates</p>
+                            <a href="#">shopname.ae</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="region-card">
+                        <img src="https://flagcdn.com/w20/au.png" alt="Australia Flag">
+                        <div>
+                            <p>Australia</p>
+                            <a href="#">shopname.au</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="region-card">
+                        <img src="https://flagcdn.com/w20/us.png" alt="USA Flag">
+                        <div>
+                            <p>United States</p>
+                            <a href="#">shopname.us</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="region-card">
+                        <img src="https://flagcdn.com/w20/ru.png" alt="Russia Flag">
+                        <div>
+                            <p>Russia</p>
+                            <a href="#">shopname.ru</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="region-card">
+                        <img src="https://flagcdn.com/w20/it.png" alt="Italy Flag">
+                        <div>
+                            <p>Italy</p>
+                            <a href="#">shopname.it</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="region-card">
+                        <img src="https://flagcdn.com/w20/gb.png" alt="Great Britain Flag">
+                        <div>
+                            <p>Great Britain</p>
+                            <a href="#">shopname.co.uk</a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="col">
+                    <div class="region-card">
+                        <img src="https://flagcdn.com/w20/dk.png" alt="Denmark Flag">
+                        <div>
+                            <p>Denmark</p>
+                            <a href="#">shopname.dk</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="region-card">
+                        <img src="https://flagcdn.com/w20/fr.png" alt="France Flag">
+                        <div>
+                            <p>France</p>
+                            <a href="#">shopname.fr</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="region-card">
+                        <img src="https://flagcdn.com/w20/ae.png" alt="Arabic Emirates Flag">
+                        <div>
+                            <p>Arabic Emirates</p>
+                            <a href="#">shopname.ae</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="region-card">
+                        <img src="https://flagcdn.com/w20/cn.png" alt="China Flag">
+                        <div>
+                            <p>China</p>
+                            <a href="#">shopname.cn</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid mt-5">
+        <div class="newsletter-section">
+            <h4>Subscribe to our Newsletter</h4>
+            <p>Get daily news on upcoming offers from many suppliers all over the world</p>
+            <form class="newsletter-form">
+                <div class="input-group">
+                    <input type="email" class="form-control" placeholder="Email" aria-label="Email for newsletter">
+                    <button class="btn btn-subscribe-newsletter" type="submit">Subscribe</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-brand mb-3">
+                        <img src="https://via.placeholder.com/30x30/ffffff/000000?text=B" alt="Brand Logo" class="d-inline-block align-text-top me-2">
+                        Brand
+                    </div>
+                    <p>Best information about the company goes here but now lorem ipsum is</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>About</h5>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Find store</a></li>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">Blogs</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Partnership</h5>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Find store</a></li>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">Blogs</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Information</h5>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Money Refund</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>For Users</h5>
+                    <ul>
+                        <li><a href="#">Login</a></li>
+                        <li><a href="#">Register</a></li>
+                        <li><a href="#">Settings</a></li>
+                        <li><a href="#">My Orders</a></li>
+                    </ul>
+                    <h5 class="mt-3">Get App</h5>
+                    <div class="app-badges">
+                        <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play"></a><br>
+                        <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="App Store"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Brand. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhyM9GkcSgS9hP5Kx6TfN7U" crossorigin="anonymous"></script>
+    
+</body>
+</html>
